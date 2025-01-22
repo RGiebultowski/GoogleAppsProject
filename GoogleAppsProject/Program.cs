@@ -2,36 +2,27 @@
 
 internal class Program
 {
+    private static List<Option> menuOptions;
+    private static List<GoogleApp> allApps;
+
     private static void Main(string[] args)
-    {
-        List<GoogleApp> allApps = CsvLoader.LoadCsv();
-
-        Console.WriteLine("Google Apps filter app.....");
-
+    { 
+        allApps = CsvLoader.LoadCsv();
         //TODO Menu for user
 
-        Console.WriteLine("Provide number:");
-        int userInput = Convert.ToInt32(Console.ReadLine());
-        while (userInput != 0)
+        menuOptions = new List<Option>
         {
-            switch (userInput) 
-            {
-                case 5:
-                    Console.WriteLine("Exit...");
-                    break;
-                case 1:
-                    Display(allApps);
-                    break;
-                
-            }
-            userInput = default;
-        }
-        
+            new("Display all apltication names",() => Display(allApps)),
+            new("Exit application....",() => Environment.Exit(0)),
+        };
+
+
+        Console.WriteLine("Google Apps filter app.....");
     }
 
-    static void Display(List<GoogleApp> x)
+    private static void Display(List<GoogleApp> googleApps)
     {
-        foreach(GoogleApp app in x)
+        foreach(GoogleApp app in googleApps)
             Console.WriteLine(app.Name);
     }
 }

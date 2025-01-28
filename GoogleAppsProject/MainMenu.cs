@@ -14,7 +14,7 @@ namespace GoogleAppsProject
         private List<string> menu = new List<string>() 
         {
             "1. Display all apltication names",
-            "2. ....",
+            "2. Display by user rating",
             "3. Exit app",
         };
         private string arrow = "> ";

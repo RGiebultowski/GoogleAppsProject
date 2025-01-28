@@ -1,26 +1,36 @@
-﻿using GoogleAppsProject;
+﻿using System;
+using GoogleAppsProject;
 
 internal class Program
 {
-    private static List<Option> menuOptions;
     private static List<GoogleApp> allApps;
+    private static MainMenu mainMenu = new MainMenu();
+    private static int selectedOption;
 
     private static void Main(string[] args)
-    { 
+    {
         allApps = CsvLoader.LoadCsv();
-        //TODO Menu for user
 
-        menuOptions = new List<Option>
+        Console.WriteLine("Google Apps filter app.....");
+
+        selectedOption = mainMenu.DrawMenu();
+
+        //TODO: Create some methods for user
+        switch (selectedOption)
         {
-            new("Display all apltication names",() => Display(allApps)),
-            new("Exit application....",() => Environment.Exit(0)),
-        };
-
+            case 1:
+                DisplayAllAppsByName(allApps);
+                break;
+            case 3:
+                Environment.Exit(0);
+                break;
+        }
 
         Console.WriteLine("Google Apps filter app.....");
     }
 
-    private static void Display(List<GoogleApp> googleApps)
+
+    private static void DisplayAllAppsByName(List<GoogleApp> googleApps)
     {
         foreach(GoogleApp app in googleApps)
             Console.WriteLine(app.Name);
